@@ -5,6 +5,7 @@ const modalRes=document.getElementById('modal-res-wrapper');
 const overlay=document.getElementById('overlay');
 const btnClose=document.getElementById('btn-close');
 
+//проверка на победителя 
 const checkWinner = () => {
     const square = document.getElementsByClassName('square');
     console.log(square);
@@ -31,13 +32,20 @@ const checkWinner = () => {
     }
 };
 
+ //вывод победителя 
 const prepare = res =>{
-    contentWrapper.innerHTML=`Победили ${res} !`;
+    if (btnO1.disabled===true || btnX2.disabled===true){
+        //`Победили ${res} !`
+        contentWrapper.innerHTML="Победил игрок 1";
+    } else{
+        contentWrapper.innerHTML="Победил игрок 2";
+    }
+    //contentWrapper.innerHTML=`Победили ${res} !`;
     modalRes.style.display = 'block';
 };
 
 
-
+//закрытие окна
 const closeModal =()=>{
     modalRes.style.display='none';
     location.reload();
@@ -80,7 +88,7 @@ if ((btnX1.disabled===false) || (btnO1.disabled===false)){
         if (e.target.className === 'square'){
         move % 2 === 0 ? e.target.innerHTML = 'X' : e.target.innerHTML = 'O';
         move++; 
-    checkWinner()} 
+    checkWinner();} 
     
     }); } else{
     alert('Игроки не выбрали символы!');
